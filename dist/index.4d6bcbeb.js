@@ -593,15 +593,62 @@ root.append(new (0, _appJsDefault.default)().el);
 },{"./App.js":"2kQhy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2kQhy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-class App {
+var _jsu = require("./core/jsu");
+var _fruitItem = require("./components/FruitItem");
+var _fruitItemDefault = parcelHelpers.interopDefault(_fruitItem);
+class App extends (0, _jsu.Component) {
     constructor(){
-        this.el = document.createElement("div");
-        this.el.textContent = "Hello,world!";
+        super({
+            state: {
+                //inputText: ''
+                fruits: [
+                    {
+                        name: "apple",
+                        price: 1000
+                    },
+                    {
+                        name: "banana",
+                        price: 2000
+                    },
+                    {
+                        name: "cherry",
+                        price: 3000
+                    }
+                ]
+            }
+        });
+    }
+    render() {
+        // this.el.classList.add('search')
+        // this.el.innerHTML  =  `
+        //     <input/>
+        //     <button>Click!</button>
+        // `
+        // const inputEl=this.el.querySelector('input')
+        // inputEl.addEventListener('input', () => {
+        //     this.state.inputText = inputEl.value
+        // })
+        // const buttonEl = this.el.querySelector('button')
+        // buttonEl.addEventListener('click', () => {
+        //     console.log(this.state.inputText)
+        // })
+        console.log(this.state.fruits);
+        this.el.innerHTML = `
+            <h1>Fruits</h1>
+            <ul></ul>
+        `;
+        const ulEl = this.el.querySelector("ul");
+        ulEl.append(...this.state.fruits.map((fruit)=>new (0, _fruitItemDefault.default)({
+                props: {
+                    name: fruit.name,
+                    price: fruit.price
+                }
+            }).el));
     }
 }
 exports.default = App;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./core/jsu":"9dj6o","./components/FruitItem":"79Im4"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -631,6 +678,45 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["anvqh","gLLPy"], "gLLPy", "parcelRequire39e4")
+},{}],"9dj6o":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Component", ()=>Component);
+class Component {
+    constructor(payload = {}){
+        const { tagName = "div", state = {}, props = {} } = payload;
+        this.el = document.createElement(tagName);
+        this.state = state;
+        this.props = props;
+        this.render();
+    }
+    render() {}
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"79Im4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsu = require("../core/jsu");
+class FruitItem extends (0, _jsu.Component) {
+    constructor(payload){
+        super({
+            tagName: "li",
+            props: payload.props
+        });
+    }
+    render() {
+        this.el.innerHTML = `
+                <span>${this.props.name}</span>
+                <span>${this.props.price}</span>
+        
+            `;
+        this.el.addEventListener("click", ()=>{
+            console.log(this.props.name, this.props.price);
+        });
+    }
+}
+exports.default = FruitItem;
+
+},{"../core/jsu":"9dj6o","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["anvqh","gLLPy"], "gLLPy", "parcelRequire39e4")
 
 //# sourceMappingURL=index.4d6bcbeb.js.map
