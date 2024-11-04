@@ -65,13 +65,15 @@ export class Store {
                     get: () => state[key], // state['message']
                     set: val => {
                         state[key] = val
-                        this.observers[key]()
+                        this.observers[key].forEach(observer => observer(val))
                     }
                 })
         } // 객체데이터는 for in 문을 통해 반복한다
     }
     // 데이터의 변경 감지 
     subscribe(key, cb) {
-        this.observers[key] = cb
+        Array.isArray(this.observers[key])
+        ? this.observers[key].push(cb)
+        : this.observers[key] = [cb]
     }
 }
