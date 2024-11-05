@@ -1,4 +1,4 @@
-# javascript 를 활용한 영화 검색 사이트 만들기 <br/>
+# javascript 를 활용한 라우터 & 스토어 설정 하기 <br/>
 
 ◆ `npm init -y`<br/>
 ◆ `npm i parcel -D `<br/>
